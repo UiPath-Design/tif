@@ -1,0 +1,309 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    body {
+        font-family:
+            "Inter",
+            -apple-system,
+            BlinkMacSystemFont,
+            "Segoe UI",
+            "Roboto",
+            "Oxygen",
+            "Ubuntu",
+            "Cantarell",
+            sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        background-color: #f9fafb;
+        @apply transition-colors duration-200;
+    }
+
+    .dark body {
+        background-color: #0f172a;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+}
+
+@layer components {
+    .form-input {
+        @apply w-full px-4 py-3 text-base border border-gray-300 rounded-md bg-white transition-all duration-200 ease-in-out;
+        @apply focus:outline-none focus:ring-2 focus:ring-uipath-orange focus:ring-opacity-10 focus:border-uipath-orange;
+        @apply disabled:bg-gray-50 disabled:text-gray-500 disabled:cursor-not-allowed;
+        @apply placeholder:text-gray-400;
+        @apply dark:bg-slate-800 dark:border-slate-600 dark:text-white dark:placeholder:text-slate-400;
+        @apply dark:disabled:bg-slate-900 dark:disabled:text-slate-500;
+        min-height: 44px;
+    }
+
+    .form-input.error {
+        @apply border-error bg-red-50;
+        @apply dark:bg-red-950 dark:border-red-500;
+    }
+
+    .form-textarea {
+        @apply form-input resize-y;
+        min-height: 100px;
+        line-height: 1.5;
+        font-family: inherit;
+    }
+
+    .form-select {
+        @apply form-input appearance-none bg-no-repeat;
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpath d='m6 9 6 6 6-6'/%3e%3c/svg%3e");
+        background-position: right 12px center;
+        background-size: 20px 20px;
+        padding-right: 44px;
+    }
+
+    .dark .form-select {
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpath d='m6 9 6 6 6-6'/%3e%3c/svg%3e");
+    }
+
+    .form-checkbox {
+        @apply h-5 w-5 rounded border-2 border-gray-300 text-uipath-orange;
+        @apply focus:ring-2 focus:ring-uipath-orange focus:ring-opacity-10 focus:border-uipath-orange;
+        @apply checked:bg-uipath-orange checked:border-uipath-orange;
+        @apply disabled:bg-gray-100 disabled:border-gray-300 disabled:cursor-not-allowed;
+        @apply dark:border-slate-600 dark:disabled:bg-slate-800 dark:disabled:border-slate-700;
+    }
+
+    .form-label {
+        @apply block text-sm font-medium text-gray-900 mb-2;
+        @apply dark:text-slate-200;
+    }
+
+    .form-label.required::after {
+        content: " *";
+        @apply text-error;
+    }
+
+    .form-error {
+        @apply text-error text-sm mt-1 flex items-center gap-1;
+    }
+
+    .form-help {
+        @apply text-gray-500 text-sm mt-1;
+        @apply dark:text-slate-400;
+    }
+
+    .form-section {
+        @apply mb-12;
+    }
+
+    .form-section-header {
+        @apply text-lg font-bold uppercase text-gray-700 pb-3 mb-6;
+        @apply dark:text-slate-300;
+        border-bottom: 2px solid #e5e7eb;
+    }
+
+    .dark .form-section-header {
+        border-bottom-color: #475569;
+    }
+
+    .button-primary {
+        @apply bg-uipath-orange text-white font-semibold px-8 py-3 rounded-md border-none cursor-pointer;
+        @apply transition-all duration-200 ease-in-out;
+        @apply hover:bg-uipath-orange-hover hover:shadow-button;
+        @apply active:scale-95;
+        @apply disabled:bg-gray-300 disabled:cursor-not-allowed disabled:shadow-none;
+        @apply dark:disabled:bg-slate-700 dark:disabled:text-slate-500;
+        @apply focus:outline-none focus:ring-2 focus:ring-uipath-orange focus:ring-opacity-30;
+        min-width: 160px;
+        font-size: 16px;
+        min-height: 44px;
+    }
+
+    .character-counter {
+        @apply absolute bottom-2 right-3 text-xs text-gray-400 pointer-events-none;
+        @apply dark:text-slate-500;
+        font-variant-numeric: tabular-nums;
+    }
+
+    .character-counter.warning {
+        @apply text-warning;
+    }
+
+    .character-counter.error {
+        @apply text-error;
+    }
+
+    .selected-pill {
+        @apply inline-flex items-center px-3 py-1 bg-uipath-orange text-white text-sm rounded-full;
+        @apply transition-all duration-200 ease-in-out;
+    }
+
+    .selected-pill button {
+        @apply text-white hover:bg-white hover:bg-opacity-20 rounded-full transition-colors;
+        @apply focus:outline-none focus:ring-1 focus:ring-white focus:ring-opacity-50;
+        padding: 2px;
+        margin-left: 8px;
+    }
+
+    .selected-pill button:hover {
+        @apply bg-white bg-opacity-20 scale-110;
+    }
+
+    .selected-pill button:active {
+        @apply scale-95;
+    }
+
+    /* Theme toggle button */
+    .theme-toggle {
+        @apply p-2 rounded-lg border border-gray-300 bg-white hover:bg-gray-50;
+        @apply dark:border-slate-600 dark:bg-slate-800 dark:hover:bg-slate-700;
+        @apply transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-uipath-orange focus:ring-opacity-10;
+    }
+}
+
+@layer utilities {
+    .text-balance {
+        text-wrap: balance;
+    }
+
+    .scrollbar-thin {
+        scrollbar-width: thin;
+        scrollbar-color: #d1d5db transparent;
+    }
+
+    .scrollbar-thin::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    .scrollbar-thin::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    .scrollbar-thin::-webkit-scrollbar-thumb {
+        background-color: #d1d5db;
+        border-radius: 3px;
+    }
+
+    .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+        background-color: #9ca3af;
+    }
+}
+
+/* Custom focus styles for better accessibility */
+*:focus-visible {
+    outline: 2px solid #fa4616;
+    outline-offset: 2px;
+}
+
+/* Dark mode header and content styling */
+.dark .header {
+    @apply bg-slate-800 border-slate-700;
+}
+
+.dark .description-box {
+    @apply bg-slate-800 border-slate-700 text-slate-300;
+}
+
+/* Dark mode dropdown styling */
+.dark .dropdown-menu {
+    @apply bg-slate-800 border-slate-600 shadow-xl;
+}
+
+.dark .dropdown-option {
+    @apply text-slate-200 hover:bg-slate-700;
+}
+
+.dark .dropdown-option:disabled {
+    @apply text-slate-500;
+}
+
+/* Grid background texture */
+.grid-wrapper {
+    min-height: 100%;
+    width: 100%;
+    position: relative;
+    background-color: #f8fafc;
+}
+
+.dark .grid-wrapper {
+    background-color: #0f172a;
+}
+
+.grid-background {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 0;
+    background-image:
+        linear-gradient(to right, #e2e8f0 1px, transparent 1px),
+        linear-gradient(to bottom, #e2e8f0 1px, transparent 1px);
+    background-size: 20px 30px;
+    -webkit-mask-image: radial-gradient(
+        ellipse 70% 60% at 50% 100%,
+        #000 60%,
+        transparent 100%
+    );
+    mask-image: radial-gradient(
+        ellipse 70% 60% at 50% 100%,
+        #000 60%,
+        transparent 100%
+    );
+}
+
+.dark .grid-background {
+    background-image:
+        linear-gradient(to right, #334155 1px, transparent 1px),
+        linear-gradient(to bottom, #334155 1px, transparent 1px);
+}
+
+/* Animation for success modal */
+.modal-overlay {
+    backdrop-filter: blur(4px);
+}
+
+.modal-enter {
+    opacity: 0;
+    transform: scale(0.9) translateY(-10px);
+}
+
+.modal-enter-active {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    transition: all 200ms ease-out;
+}
+
+.modal-exit {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+}
+
+.modal-exit-active {
+    opacity: 0;
+    transform: scale(0.9) translateY(-10px);
+    transition: all 150ms ease-in;
+}
+
+/* Resize handle for textareas */
+.textarea-container {
+    position: relative;
+}
+
+.textarea-container::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 16px;
+    height: 16px;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24'%3e%3cpath stroke='%239CA3AF' stroke-width='2' d='M7 7l10 10M7 17l10-10'/%3e%3c/svg%3e");
+    background-size: 12px;
+    background-repeat: no-repeat;
+    background-position: center;
+    pointer-events: none;
+    opacity: 0.5;
+}
