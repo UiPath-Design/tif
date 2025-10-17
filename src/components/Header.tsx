@@ -10,7 +10,7 @@ const Header: React.FC = () => {
           <div className="flex items-center">
             <div className="w-11 h-11 mr-4">
               <img
-                src="/assets/UiPath_icon.svg"
+                src="./assets/UiPath_icon.svg"
                 alt="UiPath Logo"
                 className="w-full h-full"
               />
